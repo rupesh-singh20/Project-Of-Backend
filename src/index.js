@@ -1,13 +1,12 @@
 // require("dotenv").config({ path: "./env" });
 
 import dotenv from "dotenv";
-import connectDB from "./db/index.js";
 
-import { app } from "./app.js";
+dotenv.config();
 
-dotenv.config({
-  path: "./env",
-});
+const { default: connectDB } = await import("./db/index.js");
+const { app } = await import("./app.js");
+
 connectDB()
   .then(() => {
     app.listen(process.env.PORT || 8000, () => {
